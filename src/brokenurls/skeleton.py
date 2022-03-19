@@ -16,7 +16,6 @@ from tomlkit import string
 
 _logger = logging.getLogger(__name__)
 
-ALLOWED_DOMAINS = []
 brokenURLs = []
 
 def getURLs(html, element, select):
@@ -49,7 +48,7 @@ def isImage(url):
         url.endswith(".jpeg") or \
         url.endswith(".svg")
 
-def search(current, URL, parentURL, userInput, visitedURLs, imgOnly):
+def search(current, URL, parentURL, userInput, visitedURLs, imgOnly, ALLOWED_DOMAINS):
     """Get broken URLs list
 
     Args:
@@ -76,9 +75,9 @@ def search(current, URL, parentURL, userInput, visitedURLs, imgOnly):
                 # if URL is not a (png|jgp|jpeg|svg) image
                 if (not isImage(URL)):
                     for url in getURLs(response.text, "href", "a[href]"):
-                        search(current, urljoin(URL, url), URL, userInput, visitedURLs, imgOnly)
+                        search(current, urljoin(URL, url), URL, userInput, visitedURLs, imgOnly, ALLOWED_DOMAINS)
                     for imgUrl in getURLs(response.text, "src", "img[src]"):
-                        search(current, urljoin(URL, imgUrl), URL, userInput, visitedURLs, imgOnly)
+                        search(current, urljoin(URL, imgUrl), URL, userInput, visitedURLs, imgOnly, ALLOWED_DOMAINS)
         except Exception as e:
             _logger.error("ERROR: " + str(e));
             visitedURLs.append(current)
@@ -135,6 +134,15 @@ def parse_args(args):
         help="filter only broken img link (png|jpg|jpeg|svg)",
         action="store_const",
         const=True
+    ),
+    parser.add_argument(
+        "-a",
+        "--allowed-domains",
+        dest="ALLOWED_DOMAINS",
+        help="scan urls in allowed domains list",
+        nargs='+',
+        required=False,
+        default=[]
     )
     return parser.parse_args(args)
 
@@ -165,7 +173,10 @@ def main(args):
     setup_logging(args.loglevel)
     _logger.info("Starting analysis...")
 
-    search(args.url, args.url, "", args.url, [], args.imgOnly)
+    print("ALLOWED_DOMAINS: \n")
+    print(args.ALLOWED_DOMAINS)
+
+    search(args.url, args.url, "", args.url, [], args.imgOnly, args.ALLOWED_DOMAINS)
 
     print("\n--- Analysis completed ---\n")
 
