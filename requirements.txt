@@ -1,0 +1,25 @@
+beautifulsoup4==4.10.0
+BrokenURLs @ file:///Users/degasparid/Projects/POC/BrokenURLs/BrokenURLs
+certifi==2021.10.8
+charset-normalizer==2.0.12
+ConfigUpdater==3.1
+distlib==0.3.4
+filelock==3.6.0
+idna==3.3
+packaging==21.3
+platformdirs==2.5.1
+pluggy==1.0.0
+py==1.11.0
+pyparsing==3.0.7
+PyScaffold==4.2.1
+pywatchman==1.4.1
+requests==2.27.1
+setuptools-scm==6.4.2
+six==1.16.0
+soupsieve==2.3.1
+toml==0.10.2
+tomli==2.0.1
+tomlkit==0.10.0
+tox==3.24.5
+urllib3==1.26.9
+virtualenv==20.13.3
