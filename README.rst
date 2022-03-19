@@ -8,15 +8,22 @@
 BrokenURLs
 ==========
 
-
     A simple crawler looking for 404 resources
 
 ==========
 How to install
 ==========
 """
-Run ``pip3 install .``
+Run ``pip3 install -r requirements.txt .``
 which will install the command ``brokenUrls`` inside your current environment.
+
+You may be asked for adding the folder containing bin files to your $PATH
+
+just a couple of examples:
+``export PATH=$PATH:/usr/local/bin``
+or
+``export PATH=$PATH:/usr/bin``
+
 """
 
 ==========
