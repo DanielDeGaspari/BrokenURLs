@@ -33,6 +33,8 @@ Run ``brokenUrls -h`` for options provided
 
 Run ``brokenUrls -u https://mywebsite.com/`` to execute a scan
 
+Run ``brokenUrls -u https://mywebsite.com/ --allowed-domains mydomain1.com mydomain2.com`` to execute a scan following domains in allowed domains list
+
 Run ``brokenUrls -u https://mywebsite.com/ -imgOnly`` to execute a scan searching only for broken images' urls (PNG,JPG,JPEG,SVG)
 
 .. _pyscaffold-notes:
